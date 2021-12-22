@@ -17,7 +17,7 @@
     <link rel="shortcut icon" type="image/svg" href="{% static 'favicon.svg' %}">
 
 </head>
-<body style="background: #202020; color: whitesmoke;">
+<body id="background">
 
 <nav class="navbar navbar sticky-top navbar-expand-lg navbar-dark" id="header-navbar">
     <a class="navbar-brand" style="padding: 0 50px 0 10px;font-size: 30px; font-weight: 600;" href="{% url 'home' %}">
@@ -35,11 +35,29 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'chat:chat_users' %}">Chat</a>
+                </li>
+                {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'save_blog' %}">Write Blog</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'Logout' %}">
+                        Logout ({{ user.get_short_name }})
+                    </a>
                 </li>
             </ul>
         </div>
+
 
     {% else %}
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -53,14 +71,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Login' %}">Login</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                </li>
             </ul>
         </div>
     {% endif %}
 </nav>
 
-
-<div class="container" style="margin-top: 50px;">
-    {% block content %}{% endblock content %}
-</div>
+<br>
+{% include 'essential/messages.html' %}
 
 </body>

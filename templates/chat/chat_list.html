@@ -1,0 +1,44 @@
+{% include "header.html" %}
+
+{% block content %}
+    <div class="message-box text-center" style="background: white;border-radius: 15px">
+        <a href={% url 'chat:chat' receiver %}>
+            <button class="btn btn btn-danger"><i class="fa fa-refresh" aria-hidden="true"></i>
+                Refresh For Any New Chats
+            </button>
+        </a>
+        <br><br><br>
+
+        {% for c in chat %}
+            {% if c.user == request.user %}
+                <div style="margin-left: 30%; ">
+                    <div class="chat text-right" style="width: auto; background: #9f21f3; box-shadow: 2px 2px 2px 2px #56008a;">
+                        <p class="chat-user"> {{ c.user }} </p>
+                        <p class="text-right">
+                            <b class="chat-content">{{ c|linebreaks }}</b>
+                        </p>
+                        <p class="chat-date text-right">{{ c.posted_at }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div style="margin-right: 30%; ">
+                    <div class="chat " style="width: auto; background: #2196f3; box-shadow: 2px 2px 2px 2px #14568b;">
+                        <p class="chat-user"> {{ c.user }} </p>
+                        <p class="text-right">
+                            <b class="chat-content">{{ c|linebreaks }}</b>
+                        </p>
+                        <p class="chat-date text-left">{{ c.posted_at }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <br><br>
+        {% empty %}
+            <h1>No messages!</h1><br>
+        {% endfor %}
+        <br>
+
+        <a href="{% url 'chat:new' receiver %}">
+            <button class="btn btn-outline-info">New Message</button>
+        </a>
+    </div>
+{% endblock content %}

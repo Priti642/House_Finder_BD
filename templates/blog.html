@@ -1,0 +1,36 @@
+{% include "header.html" %}
+
+{% block blog_dashboard %}
+    <p class="text-center" style="font-size: 28px; background: #00ff8ca3; border-radius: 20px 20px 0 0">
+        Blogs
+    </p>
+    <div style="height: 600px; background: #0a8e53; font-size: 20px; border-radius: 0 0 20px 20px">
+        <br><br><br>
+        {% if count == 0 %}
+            <p class="text-center">
+                No item is available to show!
+            </p>
+
+        {% else %}
+            {% for b in blogs %}
+                <div class="container post-container clearfix">
+                    <button class="post-button" style="background: #00a2d0" onclick="goToLink({{ b.blog_id }})">
+                        <img class="post-img" src="/media/{{ b.picture1 }}"/>
+                        <br>
+                        <p class="text-center">
+                            <b> Blog {{ b.blog_id }}</b>
+                        </p>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+<script>
+    function goToLink(id){
+        window.location.href = 'blog_view/'+id;
+    }
+</script>
+
+{% include "footer.html" %}

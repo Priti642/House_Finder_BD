@@ -16,8 +16,7 @@
                 {{ login_form.password|as_crispy_field }}
             </div>
 
-            <div class="text-right p-t-8 p-b-31">
-            </div>
+            <br>
 
             <div class="container-login100-form-btn">
                 <div class="wrap-login100-form-btn">
@@ -29,11 +28,17 @@
             </div>
         </form>
 
-        <p class="text-center" style="padding-top: 10px">
+        <p class="text-right" style="padding-top: 10px">
             Don't have an account?
             <a href={% url 'Register' %}>
                 Create an account here
             </a>
+            <br>
+            <a href={% url 'Password Reset' %}>
+                Forgot password?
+            </a>
         </p>
     </div>
 {% endblock %}
+
+{% include 'footer.html' %}

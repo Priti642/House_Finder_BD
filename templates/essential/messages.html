@@ -1,0 +1,23 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <div id="id_message" class="container-fluid p-0 container">
+                <div class="row">
+                    <div class="alert {{ message.tags }} alert-dismissible col-sm" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="close_message()">
+                            <span class="text-center" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<script>
+    function close_message() {
+        const div = document.getElementById('id_message');
+        div.style.display = "none";
+    }
+</script>

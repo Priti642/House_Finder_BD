@@ -1,0 +1,22 @@
+{% include "header.html" %}
+
+{% block details %}
+    <div class="py-5 detail-post p-t-65 p-b-54" style="width: 100%;">
+        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture1 }}"/>
+        <br>
+
+
+        <div class="table-responsive" style="width: 100%; padding: 50px 15% 10px">
+            <p class="text-center" style="font-size: 18px"><b>Writing:</b></p>
+            <br>
+            <p class="text-center" style="font-size: 18px">{{ blog.text }}</p>
+        </div>
+
+        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture2 }}"/>
+        <br>
+        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture3 }}"/>
+    </div>
+{% endblock %}
+
+
+{% include "footer.html" %}

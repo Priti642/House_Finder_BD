@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+{% load crispy_forms_filters %}
+
+{% block blog %}
+    <div class="container py-5 wrap-post p-l-55 p-r-55 p-t-65 p-b-54"
+         style="margin-left: 32%;">
+        <h2 class="post-h2 text-center"> Write Blog </h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
+                {{ blog_form.text|as_crispy_field }}
+            </div>
+            <br>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
+                {{ blog_form.picture1|as_crispy_field }}
+            </div>
+            <br>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
+                {{ blog_form.picture2|as_crispy_field }}
+            </div>
+            <br>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
+                {{ blog_form.picture3|as_crispy_field }}
+            </div>
+            <br>
+
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn">
+                        Save Blog
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% include 'footer.html' %}

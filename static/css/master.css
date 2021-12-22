@@ -30,6 +30,10 @@ li {
     list-style-type: none;
 }
 
+#background{
+    background: linear-gradient(to left, #6569c2, #303484);
+}
+
 
 #header-navbar {
     background-color: #009688;
@@ -90,7 +94,6 @@ li {
 }
 
 .heading {
-    font-family: 'Pacifico', cursive;
     letter-spacing: 2px;
 }
 
@@ -209,7 +212,6 @@ a {
 }
 
 a {
-    font-size: 16px;
     line-height: 1.7;
     color: #666;
     margin: 0;
@@ -324,7 +326,8 @@ button:hover {
     width: 500px;
     background: #fff;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    box-shadow: 0 0 20px;
 }
 
 .login100-form {
@@ -2363,4 +2366,10 @@ label {
     width: 90%;
     border-radius: 10px;
     overflow: hidden;
+}
+
+.message-box {
+    width: 80%;
+    padding: 10px;
+    margin-left: 10%;
 }
