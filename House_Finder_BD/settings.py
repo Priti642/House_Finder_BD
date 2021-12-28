@@ -1,9 +1,9 @@
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -15,7 +15,6 @@ SECRET_KEY = 'django-insecure-p!xnmelut08x$^uie4#(m-@w-3o)3vei84&@9)lj)-5y#0#2sz
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
 
     'bootstrap4',
     'crispy_forms',
+    'tinymce',
 
     'user.apps.UserConfig',
     'blog.apps.BlogConfig',
@@ -61,6 +61,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -69,7 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'House_Finder_BD.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -80,7 +80,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -100,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -114,7 +112,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # bootstrap design for messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
@@ -123,7 +120,6 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -143,3 +139,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+TINYMCE_JS_ROOT = os.path.join(MEDIA_URL, "../static/js/tinymce.js")

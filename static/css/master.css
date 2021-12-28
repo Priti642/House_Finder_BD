@@ -30,11 +30,6 @@ li {
     list-style-type: none;
 }
 
-#background{
-    background: linear-gradient(to left, #6569c2, #303484);
-}
-
-
 #header-navbar {
     background-color: #009688;
     font-weight: 300;
@@ -2372,4 +2367,30 @@ label {
     width: 80%;
     padding: 10px;
     margin-left: 10%;
+}
+
+#background {
+    background: linear-gradient(to left, #6569c2, #303484);
+}
+
+
+#particles-js {
+    height: 100%;
+    width: 100%;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to left, #092a5f, #092a5f) no-repeat fixed;
+    z-index: -10;
+}
+
+#particles-js canvas {
+    display: block;
+    vertical-align: bottom;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease
+}
+
+.nav-link > .btn-primary {
+    border: 2px white;
 }

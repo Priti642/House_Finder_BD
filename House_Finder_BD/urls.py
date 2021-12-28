@@ -10,6 +10,8 @@ urlpatterns = [
     path('accounts/', include('user.urls')),
     path('blog/', include('blog.urls')),
     path('chat/', include('chat.urls')),
+
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:

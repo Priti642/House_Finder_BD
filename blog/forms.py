@@ -1,12 +1,22 @@
 from django import forms
 from blog.models import BlogModel
+from tinymce.widgets import TinyMCE
 
 
 # Blog Form
 class BlogForm(forms.ModelForm):
-    text = forms.CharField(
+    blog_title = forms.CharField(
         required=True,
         widget=forms.TextInput(
+            attrs={},
+        ),
+        min_length=10,
+        label='Blog Title',
+    )
+
+    text = forms.CharField(
+        required=True,
+        widget=TinyMCE(
             attrs={},
         ),
         min_length=10,
@@ -39,10 +49,11 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = BlogModel
-        fields = ('text', 'picture1', 'picture2', 'picture3')
+        fields = ('blog_title', 'text', 'picture1', 'picture2', 'picture3')
 
     def save(self, commit=True):
         save_blog = super(BlogForm, self).save(commit=False)
+        save_blog.blog_title = self.cleaned_data['blog_title']
         save_blog.text = self.cleaned_data['text']
 
         save_blog.picture1 = self.first_picture

@@ -8,7 +8,11 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
-                {{ blog_form.text|as_crispy_field }}
+                {{ blog_form.blog_title|as_crispy_field }}
+            </div>
+            <br>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
+                {{ blog_form.text }}
             </div>
             <br>
             <div class="wrap-input100 validate-input m-b-23" data-validate="Required">
