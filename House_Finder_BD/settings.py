@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-p!xnmelut08x$^uie4#(m-@w-3o)3vei84&@9)lj)-5y#0#2sz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -139,4 +139,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-TINYMCE_JS_ROOT = os.path.join(MEDIA_URL, "../static/js/tinymce.js")
+TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "js/tinymce.js")
+TINYMCE_JS_URL = os.path.join(STATIC_URL, "js/tiny_mce")

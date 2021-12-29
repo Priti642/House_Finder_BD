@@ -9,7 +9,7 @@
         <div class="table-responsive" style="width: 100%; padding: 50px 15% 10px">
             <p class="text-center" style="font-size: 40px"><b>Writing:</b></p>
             <br>
-            <p class="text-center" style="font-size: 25px">{{ blog.text }}</p>
+            <p class="text-center" style="font-size: 25px">{{ blog.text|safe }}</p>
         </div>
 
         <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture2 }}"/>
