@@ -2377,7 +2377,7 @@ label {
 #particles-js {
     height: 100%;
     width: 100%;
-    position: fixed !important;
+    position: absolute !important;
     top: 0;
     left: 0;
     background: linear-gradient(to left, #092a5f, #092a5f) no-repeat fixed;
