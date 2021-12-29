@@ -1,0 +1,1 @@
+web: gunicorn House_Finder_BD.wsgi:application --log-file -
