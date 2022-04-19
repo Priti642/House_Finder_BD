@@ -1,7 +1,286 @@
-{% extends "header.html" %}
+{% load static %}
+{% include "header.html" %}
 
-{% block content %}
+<main id="main">
 
-{% endblock %}
+    <!-- ======= Services Section ======= -->
+    <section class="section-services section-t8">
+        {% include 'essential/messages.html' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrap d-flex justify-content-between">
+                        <div class="title-box">
+                            <h2 class="title-a">Our Services</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card-box-c foo">
+                        <div class="card-header-c d-flex">
+                            <div class="card-box-ico">
+                                <span class="bi bi-cart"></span>
+                            </div>
+                            <div class="card-title-c align-self-center">
+                                <h2 class="title-c">Hostel</h2>
+                            </div>
+                        </div>
+                        <div class="card-body-c">
+                            <p class="content-c">
+                                Get your desired hostel without any hassle.
+                            </p>
+                        </div>
+                        <div class="card-footer-c">
+                            <a href="#" class="link-c link-icon">Read more
+                                <span class="bi bi-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-box-c foo">
+                        <div class="card-header-c d-flex">
+                            <div class="card-box-ico">
+                                <span class="bi bi-calendar4-week"></span>
+                            </div>
+                            <div class="card-title-c align-self-center">
+                                <h2 class="title-c">Advertise</h2>
+                            </div>
+                        </div>
+                        <div class="card-body-c">
+                            <p class="content-c">
+                                Advertise your House.
+                            </p>
+                        </div>
+                        <div class="card-footer-c">
+                            <a href="#" class="link-c link-icon">Read more
+                                <span class="bi bi-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-box-c foo">
+                        <div class="card-header-c d-flex">
+                            <div class="card-box-ico">
+                                <span class="bi bi-card-checklist"></span>
+                            </div>
+                            <div class="card-title-c align-self-center">
+                                <h2 class="title-c">Blogs</h2>
+                            </div>
+                        </div>
+                        <div class="card-body-c">
+                            <p class="content-c">
+                                Get necessary information from blogs.
+                            </p>
+                        </div>
+                        <div class="card-footer-c">
+                            <a href="#" class="link-c link-icon">Read more
+                                <span class="bi bi-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Services Section -->
 
-{% include 'footer.html' %}
+    <!-- ======= Latest Properties Section ======= -->
+    <section class="section-property section-t8">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrap d-flex justify-content-between">
+                        <div class="title-box">
+                            <h2 class="title-a">Latest Properties</h2>
+                        </div>
+                        <div class="title-link">
+                            <a href={% url 'property:property_dashboard' %}>All Property
+                                <span class="bi bi-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="property-carousel" class="swiper">
+                <div class="swiper-wrapper">
+                    {% for p in properties %}
+                        <div class="carousel-item-b swiper-slide">
+                            <div class="card-box-a card-shadow">
+                                <div class="img-box-a">
+                                    <img src="/media/{{ p.picture1 }}" alt="" class="img-a img-fluid">
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-overlay-a-content">
+                                        <div class="card-header-a">
+                                            <h2 class="card-title-a">
+                                                <a href={% url 'property:property_view' p.property_id %}>
+                                                    {{ p.title }} <br> {{ p.address }}
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body-a">
+                                            <div class="price-box d-flex">
+                                                <span class="price-a">{{ p.status }} | &#2547; {{ p.amount }}</span>
+                                            </div>
+                                            <a class="link-a" href={% url 'property:property_view' p.property_id %}>
+                                                Click here to view
+                                                <span class="bi bi-chevron-right"></span>
+                                            </a>
+                                        </div>
+                                        <div class="card-footer-a">
+                                                <ul class="card-info d-flex justify-content-around">
+                                                    <li>
+                                                        <h4 class="card-info-title">Area</h4>
+                                                        <span>
+                                                            {{ p.area }}m <sup>2</sup>
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <h4 class="card-info-title">Beds</h4>
+                                                        <span>{{ p.bedroom }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <h4 class="card-info-title">Baths</h4>
+                                                        <span>{{ p.bathroom }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <h4 class="card-info-title">Garages</h4>
+                                                        <span>{{ p.garage }}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End carousel item -->
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="propery-carousel-pagination carousel-pagination"></div>
+
+        </div>
+    </section><!-- End Latest Properties Section -->
+
+    <!-- ======= Latest Blogs Section ======= -->
+    <section class="section-news section-t8">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrap d-flex justify-content-between">
+                        <div class="title-box">
+                            <h2 class="title-a">Latest Blogs</h2>
+                        </div>
+                        <div class="title-link">
+                            <a href={% url 'blog:blog_dashboard' %}>More Blogs
+                                <span class="bi bi-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="news-carousel" class="swiper">
+                <div class="swiper-wrapper">
+                    {% for b in blogs %}
+                        <div class="carousel-item-c swiper-slide">
+                            <div class="card-box-b card-shadow news-box">
+                                <div class="img-box-b">
+                                    <img src="/media/{{ b.picture }}" alt="" class="img-b img-fluid">
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-header-b">
+                                        <div class="card-category-b">
+                                            <a class="category-b">{{ b.user | title }}</a>
+                                        </div>
+                                        <div class="card-title-b">
+                                            <h2 class="title-2">
+                                                <a href="{% url 'blog:blog_view' b.blog_id %}">{{ b.blog_title }}</a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-date">
+                                            <span class="date-b">{{ b.time }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End carousel item -->
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="news-carousel-pagination carousel-pagination"></div>
+        </div>
+    </section><!-- End Latest Blogs Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section class="section-testimonials section-t8 nav-arrow-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrap d-flex justify-content-between">
+                        <div class="title-box">
+                            <h2 class="title-a">Testimonials</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="testimonial-carousel" class="swiper">
+                <div class="swiper-wrapper">
+
+                    <div class="carousel-item-a swiper-slide">
+                        <div class="testimonials-box">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="testimonial-ico">
+                                        <i class="bi bi-chat-quote-fill"></i>
+                                    </div>
+                                    <div class="testimonials-content">
+                                        <p class="testimonial-text">
+                                            Good website for advertising houses.
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author-box">
+                                        <img src="{% static 'assets/img/mini-testimonial-1.jpg' %}" alt="" class="testimonial-avatar">
+                                        <h5 class="testimonial-author">Albert & Erika</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End carousel item -->
+
+                    <div class="carousel-item-a swiper-slide">
+                        <div class="testimonials-box">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="testimonial-ico">
+                                        <i class="bi bi-chat-quote-fill"></i>
+                                    </div>
+                                    <div class="testimonials-content">
+                                        <p class="testimonial-text">
+                                            This website helps me to find hostel, a very good website for students.
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author-box">
+                                        <img src="{% static 'assets/img/mini-testimonial-2.jpg' %}" alt="" class="testimonial-avatar">
+                                        <h5 class="testimonial-author">Pablo & Emma</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End carousel item -->
+
+                </div>
+            </div>
+            <div class="testimonial-carousel-pagination carousel-pagination"></div>
+
+        </div>
+    </section><!-- End Testimonials Section -->
+
+</main><!-- End #main -->
+
+{% include "footer.html" %}

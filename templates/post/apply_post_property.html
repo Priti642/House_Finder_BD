@@ -1,0 +1,96 @@
+{% include 'header.html' %}
+
+{% block post_property %}
+    <main id="main">
+        <section class="intro-single">
+            {% include 'essential/messages.html' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
+                        <div class="card border-0 shadow rounded-3 my-5">
+                            <div class="card-body p-4 p-sm-5" style="background: #2eca6a">
+                                <h5 class="card-title text-center mb-5 fs-2">Fill the form</h5>
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.phone }}
+                                        <label for="floatingPhone">Phone number</label>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.additional_phone }}
+                                        <label for="floatingAdditionalPhone">Additional Phone number</label>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.bio_data }}
+                                    </div>
+                                    <br>
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.facebook }}
+                                        <label for="floatingAdditionalPhone">Facebook Profile link</label>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.twitter }}
+                                        <label for="floatingTwitter">Twitter Profile Link</label>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-floating mb-3">
+                                        {{ post_property_form.skype }}
+                                        <label for="floatingSkype">Skype ID</label>
+                                    </div>
+                                    <br>
+
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#id_text',
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'save table contextmenu directionality emoticons template paste textcolor'
+            ],
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify ' +
+                '| bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+        });
+    </script>
+    <script>
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+            $('#preview_state').removeClass('d-none');
+        }
+    </script>
+{% endblock %}
+
+{% include 'footer.html' %}

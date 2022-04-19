@@ -1,22 +1,148 @@
 {% include "header.html" %}
 
-{% block details %}
-    <div class="py-5 detail-post p-t-65 p-b-54" style="width: 100%;">
-        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture1 }}"/>
-        <br>
+{% block single_blog %}
+    <main id="main">
+        <section class="intro-single">
+            {% include 'essential/messages.html' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="title-single-box">
+                            <h1 class="title-single">{{ blog.blog_title }}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href={% url 'home' %}>Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Book Cover Deisgn
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Intro Single-->
 
+        <!-- ======= Blog Single ======= -->
+        <section class="news-single nav-arrow-b">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="news-img-box">
+                            <img src="/media/{{ blog.picture }}" alt={{ blog.blog_title }} class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                        <div class="post-information">
+                            <ul class="list-inline text-center color-a">
+                                <li class="list-inline-item mr-2">
+                                    <strong>Author: </strong>
+                                    <span class="color-text-a">{{ blog.user | title }}</span>
+                                </li>
+                                <li class="list-inline-item">
+                                    <strong>Date: </strong>
+                                    <span class="color-text-a">{{ blog.time }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="post-content color-text-a">
+                            <p class="post-intro">
+                                {{ blog.text | safe }}
+                            </p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-share">
+                                <span>Share: </span>
+                                <ul class="list-inline socials">
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+                        <div class="title-box-d">
+                            <h3 class="title-d">Comments ({{ comment_count }})</h3>
+                        </div>
+                        <div class="box-comments">
+                            {% if comment_count > 0 %}
+                                <ul class="list-comments">
+                                    {% for comment in comments %}
+                                        <li>
+                                            <div class="comment-details">
+                                                <h4 class="comment-author">{{ comment.comment_user | title }}</h4>
+                                                <span>{{ comment.time }}</span>
+                                                <p class="comment-description">
+                                                    {{ comment.comment }}
+                                                </p>
+                                                {% if user == blog.user %}
+                                                    <a class="text-danger" href={% url 'delete_comment' comment.comment_id %}>Delete</a>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="comment-description">
+                                    No comment has been added
+                                </p>
+                            {% endif %}
 
-        <div class="table-responsive" style="width: 100%; padding: 50px 15% 10px">
-            <p class="text-center" style="font-size: 40px"><b>Writing:</b></p>
-            <br>
-            <p class="text-center" style="font-size: 25px">{{ blog.text|safe }}</p>
-        </div>
+                        </div>
+                        <div class="form-comments">
+                            <div class="title-box-d">
+                                <h3 class="title-d"> Leave a Reply</h3>
+                            </div>
+                            {% if user.is_authenticated %}
+                                <form class="form-a" method="POST" action={% url 'save_comment' blog.blog_id %}>
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="textMessage">Enter Comment</label>
+                                                {{ comment_form.comment }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-a">Comment</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <p>
+                                    Please login to leave a reply.
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Blog Single-->
 
-        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture2 }}"/>
-        <br>
-        <img class="rounded mx-auto d-block img-responsive" style="width: 1000px;" src="/media/{{ blog.picture3 }}"/>
-    </div>
+    </main><!-- End #main -->
+
 {% endblock %}
-
 
 {% include "footer.html" %}

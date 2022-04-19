@@ -1,0 +1,302 @@
+{% include 'header.html' %}
+
+<main id="main">
+    <section class="intro-single">
+        {% include 'essential/messages.html' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
+                    <div class="card border-0 shadow rounded-3 my-5">
+                        <div class="card-body p-4 p-sm-5" style="background: #4caf50">
+                            <h5 class="card-title text-center mb-5 fs-2" style="color: white">Register Property</h5>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.title }}
+                                    <label for="floatingTitle">Title</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.location }}
+                                    <label for="floatingLocation">Location</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.address }}
+                                    <label for="floatingAddress">Address</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.property_type }}
+                                    <label for="floatingPropertyType">Property Type</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.amount }}
+                                    <label for="floatingAmount">Amount &#2547;</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.status }}
+                                    <label for="floatingStatus">Status</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.area }}
+                                    <label for="floatingArea">Area (m<sup>2</sup>)</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.bedroom }}
+                                    <label for="floatingBedroom">Bedroom</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.bathroom }}
+                                    <label for="floatingBathroom">Bathroom</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.garage }}
+                                    <label for="floatingGarage">Garage</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.propety_description }}
+                                </div>
+                                <br>
+
+                                <p>
+                                    Upload Pictures (All of them are required)
+                                </p>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.picture1 }}
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{ property_form.picture2 }}
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{ property_form.picture3 }}
+                                </div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div id="preview_state" class="col text-center d-none">
+                                            <img id="preview" alt="Preview Image"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <h3 class="card-title text-center mb-5 fs-2" style="color: white">Amenities</h3>
+
+                                <div class="form-check mb-3">
+                                    {{ property_form.balcony }}
+                                    <label class="form-check-label" for="balconyCheckbox">
+                                        Balcony
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.internet }}
+                                    <label class="form-check-label" for="internetCheckbox">
+                                        Internet
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.parking }}
+                                    <label class="form-check-label" for="parkingCheckbox">
+                                        Parking
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.gym_center }}
+                                    <label class="form-check-label" for="gym_centerCheckbox">
+                                        Gym Center
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.swimming_pool }}
+                                    <label class="form-check-label" for="swimming_poolCheckbox">
+                                        Swimming Pool
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.cable_TV }}
+                                    <label class="form-check-label" for="cable_TVCheckbox">
+                                        Cable TV
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.playground }}
+                                    <label class="form-check-label" for="playgroundCheckbox">
+                                        Playground
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.laundry_services }}
+                                    <label class="form-check-label" for="laundry_servicesCheckbox">
+                                        Laundry Services
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.online_rent_payments }}
+                                    <label class="form-check-label" for="online_rent_paymentsCheckbox">
+                                        Online Rent Payments
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.security_guards }}
+                                    <label class="form-check-label" for="security_guardsCheckbox">
+                                        Security Guards
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.barbecue_areas }}
+                                    <label class="form-check-label" for="barbecue_areasCheckbox">
+                                        Barbecue Areas
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.bike_storage }}
+                                    <label class="form-check-label" for="bike_storageCheckbox">
+                                        Bike Storage
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ property_form.rooftop_lounge_areas }}
+                                    <label class="form-check-label" for="rooftop_lounge_areasCheckbox">
+                                        Rooftop Lounge Areas
+                                    </label>
+                                </div>
+                                <br>
+
+                                <h3 class="card-title text-center mb-5 fs-2" style="color: white">Location on the Map</h3>
+                                <div id="map"></div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.latitude }}
+                                    <label for="latitude">Latitude</label>
+                                </div>
+                                <br>
+
+                                <div class="form-floating mb-3">
+                                    {{ property_form.longitude }}
+                                    <label for="longitude">Longitude</label>
+                                </div>
+                                <br>
+
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% block style %}
+    <style>
+        p {
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#id_text',
+            height: '400',
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'save table contextmenu directionality emoticons template paste textcolor'
+            ],
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify ' +
+                '| bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+        });
+    </script>
+    <script>
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+            $('#preview_state').removeClass('d-none');
+        }
+    </script>
+    <!-- Map script -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnLQoIBHPPU6UbnygTwqFjH4JmgNTMsjI&callback=initMap&v=weekly&channel=2" async>
+    </script>
+    <script>
+        function initMap() {
+            const myLatlng = {lat: 23.815, lng: 90.425};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: myLatlng,
+                mapTypeId: 'hybrid',
+            });
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+            });
+
+            setTimeout(function () {
+                $(".dismissButton").trigger('click');
+            }, 500);
+            $('#map').children().eq(1).remove();
+
+            map.addListener("click", (mapsMouseEvent) => {
+                marker.setMap(null);
+                marker = new google.maps.Marker({
+                    position: mapsMouseEvent.latLng
+                });
+                console.log(mapsMouseEvent.latLng.toJSON().lat);
+                console.log(mapsMouseEvent.latLng.toJSON().lng);
+                $('#latitude').val(mapsMouseEvent.latLng.toJSON().lat)
+                $('#longitude').val(mapsMouseEvent.latLng.toJSON().lng)
+                marker.setMap(map);
+            });
+        }
+    </script>
+
+{% endblock %}
+{% include 'footer.html' %}
+
+{% if is_edited %}
+    {% block edit %}
+        <script>
+            $("#floatingLocation").val({{ location }});
+            $("#picture1-clear_id").remove();
+            $('label[for=picture1-clear_id]').remove();
+            $("#picture2-clear_id").remove();
+            $('label[for=picture2-clear_id]').remove();
+            $("#picture3-clear_id").remove();
+            $('label[for=picture3-clear_id]').remove();
+        </script>
+    {% endblock %}
+{% endif %}

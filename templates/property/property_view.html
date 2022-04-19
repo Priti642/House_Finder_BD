@@ -1,0 +1,491 @@
+{% include "header.html" %}
+
+<main id="main">
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        {% include 'essential/messages.html' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">{{ property.title }}</h1>
+                        <span class="color-text-a">{{ property.address }}</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href={% url 'home' %}>Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href={% url 'property:property_dashboard' %}>Properties</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ property.title }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Single ======= -->
+    <section class="property-single nav-arrow-b">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div id="property-single-carousel" class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="carousel-item-b swiper-slide">
+                                <img class="img-fluid" src="/media/{{ property.picture1 }}" alt={{ property.title }}>
+                            </div>
+                            <div class="carousel-item-b swiper-slide">
+                                <img class="img-fluid" src="/media/{{ property.picture2 }}" alt={{ property.title }}>
+                            </div>
+                            <div class="carousel-item-b swiper-slide">
+                                <img class="img-fluid" src="/media/{{ property.picture3 }}" alt={{ property.title }}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-single-carousel-pagination carousel-pagination"></div>
+                    {% if access %}
+                        <div class="float-end">
+                            <a id="edit_button" class="btn btn-success" href={% url 'property:edit_property' property.property_id %}>Edit</a>
+                            <a id="delete_button" class="btn btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-5 col-lg-4">
+                            <div class="property-price d-flex justify-content-center foo">
+                                <div class="card-header-c d-flex">
+                                    <div class="card-box-ico">
+                                        <h5 class="title-c">&#2547; {{ property.amount }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-summary">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="title-box-d section-t4">
+                                            <h3 class="title-d">Quick Summary</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-list">
+                                    <ul class="list">
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Property ID:</strong>
+                                            <span>{{ property.property_id }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Location:</strong>
+                                            <span>{{ property.location }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Property Type:</strong>
+                                            <span>{{ property.property_type }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Status:</strong>
+                                            <span>{{ property.status }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Area:</strong>
+                                            <span>{{ property.area }}
+                                                    m<sup>2</sup>
+                                                </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Beds:</strong>
+                                            <span>{{ property.bedroom }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Baths:</strong>
+                                            <span>{{ property.bathroom }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Garage:</strong>
+                                            <span>{{ property.garage }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-7 section-md-t3">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Property Description</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-description">
+                                <p class="description color-text-a">
+                                    {{ property.propety_description | safe }}
+                                </p>
+                            </div>
+                            <div class="row section-t3">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Amenities</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="amenities-list color-text-a">
+                                <ul class="list-a no-margin">
+                                    {% if property.balcony %}
+                                        <li>Balcony</li> <br>
+                                    {% endif %}
+                                    {% if property.internet %}
+                                        <li>Internet</li> <br>
+                                    {% endif %}
+                                    {% if property.parking %}
+                                        <li>Parking</li> <br>
+                                    {% endif %}
+                                    {% if property.gym_center %}
+                                        <li>Gym Center</li> <br>
+                                    {% endif %}
+                                    {% if property.swimming_pool %}
+                                        <li>Swimming Pool</li> <br>
+                                    {% endif %}
+                                    {% if property.cable_TV %}
+                                        <li>Cable&nbsp;TV</li> <br>
+                                    {% endif %}
+                                    {% if property.playground %}
+                                        <li>Playground</li> <br>
+                                    {% endif %}
+                                    {% if property.laundry_services %}
+                                        <li>Laundry&nbsp;Services</li> <br>
+                                    {% endif %}
+                                    {% if property.online_rent_payments %}
+                                        <li>Online&nbsp;Rent&nbsp;Payments</li> <br>
+                                    {% endif %}
+                                    {% if property.security_guards %}
+                                        <li>Security&nbsp;Guards</li> <br>
+                                    {% endif %}
+                                    {% if property.barbecue_areas %}
+                                        <li>Barbecue&nbsp;Areas</li> <br>
+                                    {% endif %}
+                                    {% if property.bike_storage %}
+                                        <li>Bike&nbsp;Storage</li> <br>
+                                    {% endif %}
+                                    {% if property.rooftop_lounge_areas %}
+                                        <li>Rooftop&nbsp;Lounge&nbsp;Areas</li> <br>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-10 offset-md-1">
+                    <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <p class="nav-link active" aria-selected="true">Map</p>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row section-t3">
+                        <div class="col-sm-12">
+                            <div class="title-box-d">
+                                <h3 class="title-d">Contact Property Owner</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-lg-8 offset-md-1">
+                            <div class="property-agent">
+                                <h4 class="title-agent">
+                                    <a href={% url 'chat:chat_window' property_user %}>
+                                        {{ property_user.get_full_name | title }}
+                                        <small style="font-size: 14px">(Click to chat)</small>
+                                    </a>
+                                </h4>
+                                <p class="color-text-a">
+                                    {{ profile.bio_data | safe }}
+                                </p>
+                                <ul class="list-unstyled">
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Phone:</strong>
+                                        <span class="color-text-a">{{ profile.phone }}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Mobile:</strong>
+                                        <span class="color-text-a">{{ profile.additional_phone }}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Email:</strong>
+                                        <span class="color-text-a">
+                                            <a data-toggle="tooltip" href="mailto:{{ property_user.email }}" target="_blank" title="Click to send Email">
+                                                {{ property_user.email }}
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Facebook:</strong>
+                                        <span class="color-text-a">
+                                            <a data-toggle="tooltip" href="{{ profile.facebook }}" target="_blank" title="Click to enter Facebook Profile">
+                                                {{ profile.facebook }}
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Twitter:</strong>
+                                        <span class="color-text-a">
+                                            <a data-toggle="tooltip" href="{{ profile.twitter }}" target="_blank" title="Click to enter Twitter Profile">
+                                                {{ profile.twitter }}
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Skype:</strong>
+                                        <span class="color-text-a">{{ profile.skype }}</span>
+                                    </li>
+                                </ul>
+                                <div class="socials-a">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a>
+                                                <i class="bi bi-telephone" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a>
+                                                <i class="bi bi-envelope" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a>
+                                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a>
+                                                <i class="bi bi-twitter" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a>
+                                                <i class="bi bi-skype" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-10">
+                    <div class="form-comments">
+                        <div class="title-box-d">
+                            <h3 class="title-d">Reviews ({{ review_count }})</h3>
+                        </div>
+                        <div class="box-comments">
+                            {% if review_count > 0 %}
+                                <ul class="list-comments">
+                                    {% for review in reviews %}
+                                        <li>
+                                            <div class="comment-details">
+                                                <h4 class="comment-author">{{ review.user | title }}</h4>
+                                                <span>{{ review.time }}</span>
+
+                                                <div class="rating" id="posted_review">
+                                                    <input type="radio" name="rating" value="5" id="5" disabled>
+                                                    <label for="5">☆</label>
+                                                    <input type="radio" name="rating" value="4" id="4" disabled>
+                                                    <label for="4">☆</label>
+                                                    <input type="radio" name="rating" value="3" id="3" disabled>
+                                                    <label for="3">☆</label>
+                                                    <input type="radio" name="rating" value="2" id="2" disabled>
+                                                    <label for="2">☆</label>
+                                                    <input type="radio" name="rating" value="1" id="1" disabled>
+                                                    <label for="1">☆</label>
+                                                </div>
+                                                <script>
+                                                    $('#posted_review #4').removeAttr("disabled").click()
+                                                </script>
+
+                                                <p class="comment-description">
+                                                    {{ review.review }}
+                                                </p>
+                                                {% if user == review.user %}
+                                                    <a class="text-danger" href={% url 'property:delete_review' review.id %}>Delete</a>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="comment-description">
+                                    No review has been added
+                                </p>
+                            {% endif %}
+                        </div>
+                        {% if user != review.user %}
+                            <div class="title-box-d">
+                                <h3 class="title-d">Enter your review</h3>
+                            </div>
+                            {% if user.is_authenticated %}
+                                {% if user not in review_users %}
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="myForm">Enter Star</label>
+                                            <div class="rating" id="myForm">
+                                                <input type="radio" name="rating" value="5" id="5">
+                                                <label for="5">☆</label>
+                                                <input type="radio" name="rating" value="4" id="4">
+                                                <label for="4">☆</label>
+                                                <input type="radio" name="rating" value="3" id="3">
+                                                <label for="3">☆</label>
+                                                <input type="radio" name="rating" value="2" id="2">
+                                                <label for="2">☆</label>
+                                                <input type="radio" name="rating" value="1" id="1">
+                                                <label for="1">☆</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="textMessage">Enter Your Review</label>
+                                                {{ review_form.review }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button id="post_review" class="btn btn-a">Post</button>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p>
+                                        You have already reviewed this product.
+                                    </p>
+                                {% endif %}
+                            {% else %}
+                                <p>
+                                    Please login to leave a review.
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Property Single-->
+
+</main><!-- End #main -->
+
+{% block css %}
+    <style>
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center
+        }
+
+        .rating > input {
+            display: none
+        }
+
+        .rating > label {
+            position: relative;
+            width: 1em;
+            font-size: 3rem;
+            color: #2196f3;
+            cursor: pointer
+        }
+
+        #posted_review > label {
+            font-size: 2rem;
+        }
+
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important
+        }
+
+        .rating > input:checked ~ label:before {
+            opacity: 1
+        }
+
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4
+        }
+    </style>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#delete_button').click(function () {
+            if (confirm('Are you sure to delete this property?')) {
+                location.href = "{% url 'property:delete_property' property.property_id %}"
+            }
+        })
+    </script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnLQoIBHPPU6UbnygTwqFjH4JmgNTMsjI&callback=initMap&v=weekly&channel=2" async>
+    </script>
+    <script>
+        function initMap() {
+            const myLatlng = {lat: {{property.latitude}}, lng: {{property.longitude}}};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: 'hybrid',
+            });
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+            });
+            setTimeout(function () {
+                $(".dismissButton").trigger('click');
+            }, 1000);
+            $('#map').children().eq(1).remove();
+        }
+    </script>
+
+    <script>
+        let star = 1, review = "";
+        $('#post_review').on('click', function () {
+            review = $('#textMessage').val();
+            if (review.length < 10) {
+                alert("Review at least contain 10 characters");
+            } else {
+                star = $('input[name=rating]:checked', '#myForm').val();
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'property:save_review' property.property_id %}",
+                    data: {
+                        'review': review,
+                        'star': star,
+                        csrfmiddlewaretoken: window.CSRF_TOKEN,
+                    },
+                    success: function () {
+                        window.location.reload();
+                    },
+                    error: function (jqXHR, exception) {
+                        alert(jqXHR.status + " " + exception)
+                    }
+                })
+            }
+        })
+    </script>
+{% endblock %}
+
+<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+{% include "footer.html" %}

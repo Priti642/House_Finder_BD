@@ -6,10 +6,12 @@ from .views import HomePage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomePage.as_view(), name='home'),
+    path('', HomePage, name='home'),
     path('accounts/', include('user.urls')),
     path('blog/', include('blog.urls')),
     path('chat/', include('chat.urls')),
+    path('property/', include('property.urls')),
+    path('', include('post.urls')),
 
     path('tinymce/', include('tinymce.urls')),
 ]

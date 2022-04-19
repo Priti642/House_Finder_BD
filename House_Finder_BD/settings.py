@@ -29,10 +29,13 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'tinymce',
+    'rest_framework',
 
-    'user.apps.UserConfig',
     'blog.apps.BlogConfig',
     'chat.apps.ChatConfig',
+    'post.apps.PostConfig',
+    'property.apps.PropertyConfig',
+    'user.apps.UserConfig',
 ]
 
 # To Redirect User

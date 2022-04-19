@@ -1,0 +1,101 @@
+{% include "header.html" %}
+
+{% block blog_dashboard %}
+    <main id="main">
+
+        <!-- ======= Intro Single ======= -->
+        <section class="intro-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="title-single-box">
+                            <h1 class="title-single">Blogs</h1>
+                            <span class="color-text-a">Grid News</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href={% url 'home' %}>Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Blog
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Intro Single-->
+
+        <!-- =======  Blog Grid ======= -->
+        <section class="news-grid grid">
+            <div class="container">
+                <div class="row">
+                    {% if count > 0 %}
+                        {% for b in blogs %}
+                            <div class="col-md-4">
+                                <div class="card-box-b card-shadow news-box">
+                                    <div class="img-box-b">
+                                        <img src="/media/{{ b.picture }}" alt="" class="img-b img-fluid">
+                                    </div>
+                                    <div class="card-overlay">
+                                        <div class="card-header-b">
+                                            <div class="card-title-b">
+                                                <h2 class="title-2">
+                                                    <a href={% url 'blog_view' b.blog_id %}>{{ b.blog_title }}</a>
+                                                </h2>
+                                            </div>
+                                            <div class="card-date">
+                                                <span class="date-b">{{ b.time }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                No item is available to show!
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- pagination
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <nav class="pagination-a">
+                              <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                  <a class="page-link" href="#" tabindex="-1">
+                                    <span class="bi bi-chevron-left"></span>
+                                  </a>
+                                </li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item active">
+                                  <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item next">
+                                  <a class="page-link" href="#">
+                                    <span class="bi bi-chevron-right"></span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </nav>
+                          </div>
+                        </div> -->
+            </div>
+        </section><!-- End Blog Grid-->
+
+    </main><!-- End #main -->
+{% endblock %}
+
+
+{% include "footer.html" %}

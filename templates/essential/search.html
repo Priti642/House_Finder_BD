@@ -1,0 +1,122 @@
+{% load static %}
+<!-- ======= Property Search Section ======= -->
+<div class="click-closed"></div>
+<!--/ Form Search Star /-->
+<div class="box-collapse">
+    <div class="title-box-d">
+        <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed bi bi-x"></span>
+    <div class="box-collapse-wrap form">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <label class="pb-2" for="Type">Keyword</label>
+                <div class="form-group input-group">
+                    <input type="text" id="search_keyword" class="form-control form-control-lg form-control-a" placeholder="Keyword">
+                    <div class="input-group-append">
+                        <button id="capture_voice" class="btn btn-outline-primary" type="button">
+                            <i class="bi bi-mic"></i> Voice
+                        </button>
+                    </div>
+                </div>
+                <span id="status" class="text-center">Idle</span>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="Type">Type</label>
+                    <select class="form-control form-select form-control-a" id="Type">
+                        <option value="">All Type</option>
+                        <option value="Rent">For Rent</option>
+                        <option value="Sale">For Sale</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="city">City</label>
+                    <select class="form-control form-select form-control-a" id="city_">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="bedrooms">Minimum Bedrooms</label>
+                    <select class="form-control form-select form-control-a" id="bedrooms">
+                        <option value="0">Any</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="bathrooms">Minimum Bathrooms</label>
+                    <select class="form-control form-select form-control-a" id="bathrooms">
+                        <option value="0">Any</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="price">Minimum Price</label>
+                    <select class="form-control form-select form-control-a" id="price">
+                        <option value="0">Unlimited</option>
+                        <option value="2000">2,000</option>
+                        <option value="5000">5,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="20000">20,000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button id="search_button" class="btn btn-b">Search Property</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Property Search Section -->
+
+{% block javascript %}
+    <script type="text/javascript" src={% static 'speech/speech_recognition.js' %}></script>
+    <script>
+        let search_url = "{% url 'property:property_search' %}";
+
+        $('#search_button').on('click', function () {
+            let keyword = $('#search_keyword').val();
+            let type = $('#Type').val();
+            let city = $('#city_').val();
+            let bedrooms = $('#bedrooms').val();
+            let bathroom = $('#bathrooms').val();
+            let price = $('#price').val();
+
+            window.location.href = search_url +
+                '?keyword=' + keyword +
+                '&type=' + type +
+                '&city=' + city +
+                '&bedrooms=' + bedrooms +
+                '&bathroom=' + bathroom +
+                '&price=' + price;
+        })
+    </script>
+    <script>
+        let dropdown = $('#city_');
+        dropdown.empty();
+        dropdown.append('<option selected="true" disabled value="">Choose districts</option>');
+        dropdown.prop('selectedIndex', 0);
+
+        let url = "{%  url 'property:district_api' %}";
+        // Populate dropdown with list of provinces
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, entry) {
+                dropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
+            })
+        });
+    </script>
+{% endblock %}

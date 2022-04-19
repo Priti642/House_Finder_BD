@@ -7,27 +7,27 @@ from django.contrib.auth.models import User
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(required=True, widget=forms.TextInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Username'
+            'id': 'floatingUsername', 'class': 'form-control', 'placeholder': 'Username'
         }), label=False)
     first_name = forms.CharField(widget=forms.TextInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your First Name'
+            'id': 'floatingFirstname', 'class': 'form-control', 'placeholder': 'First Name'
         }), label=False)
     last_name = forms.CharField(widget=forms.TextInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Last Name'
+            'id': 'floatingLastname', 'class': 'form-control', 'placeholder': 'Last Name'
         }), label=False)
     email = forms.CharField(widget=forms.TextInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Email'
+            'id': 'floatingEmail', 'class': 'form-control', 'placeholder': 'Email'
         }), label=False)
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Password'
+            'id': 'floatingPassword', 'class': 'form-control', 'placeholder': 'Password'
         }), label=False)
     password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Retype your Password'
+            'id': 'floatingPassword2', 'class': 'form-control', 'placeholder': 'Retype Password'
         }), label=False)
 
     class Meta:
@@ -46,9 +46,9 @@ class RegistrationForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Username'
+            'id': 'floatingEmail','class': 'form-control', 'placeholder': 'Username'
         }),label=False)
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
-            'class': 'input100', 'placeholder': 'Type your Password'
+            'id': 'floatPassword','class': 'form-control','placeholder': 'Password'
         }), label=False)

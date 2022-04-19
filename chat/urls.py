@@ -1,13 +1,14 @@
 from django.urls import path
-from chat.views import chat_list_view, chat_create_view, chat_users
+from chat.views import chat_window, send_message, chat_dashboard
 
 app_name = 'chat'
 
 urlpatterns = [
+    # Chat dashboard
+    path('chat_dashboard/', chat_dashboard, name='chat_dashboard'),
     # All Message
-    path('chat_users/<receiver>', chat_list_view, name='chat'),
+    path('chat_users/<receiver>', chat_window, name='chat_window'),
     # Send Message
-    path('new/<receiver>', chat_create_view, name='new'),
-    # All user option
-    path('chat_users/', chat_users, name='chat_users')
+    path('send_message/<receiver>', send_message, name='send_message'),
+
 ]

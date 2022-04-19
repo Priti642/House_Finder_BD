@@ -1,0 +1,189 @@
+{% include "header.html" %}
+
+{% block single_blog %}
+    <main id="main">
+        <section class="intro-single">
+            {% include 'essential/messages.html' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="title-single-box">
+                            <h1 class="title-single">{{ blog.blog_title }}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href={% url 'home' %}>Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href={% url 'blog:blog_dashboard' %}>Blog</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ blog.blog_title }}
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Intro Single-->
+
+        <!-- ======= Blog Single ======= -->
+        <section class="news-single nav-arrow-b">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12">
+                        <div class="news-img-box">
+                            <img src="/media/{{ blog.picture }}" alt={{ blog.blog_title }} class="img-fluid">
+                        </div>
+                        {% if access %}
+                            <div class="float-end">
+                                <a id="edit_button" class="btn btn-success" href={% url 'blog:edit_blog' blog.blog_id %}>Edit</a>
+                                <a id="delete_button" class="btn btn-danger">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                    <div class="post-information">
+                        <ul class="list-inline text-center color-a">
+                            <li class="list-inline-item mr-2">
+                                <strong>Author: </strong>
+                                <span class="color-text-a">{{ blog.user | title }}</span>
+                            </li>
+                            <li class="list-inline-item">
+                                <strong>Date: </strong>
+                                <span class="color-text-a">{{ blog.time }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-content color-text-a">
+                        <p class="post-intro">
+                            {{ blog.text | safe }}
+                        </p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-share">
+                            <span>Share: </span>
+                            <ul class="list-inline socials">
+                                <li class="list-inline-item">
+                                    <a>
+                                        <i class="bi bi-facebook" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a>
+                                        <i class="bi bi-twitter" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a>
+                                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a>
+                                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+                    <div class="title-box-d">
+                        <h3 class="title-d">Comments ({{ comment_count }})</h3>
+                    </div>
+                    <div class="box-comments">
+                        {% if comment_count > 0 %}
+                            <ul class="list-comments">
+                                {% for comment in comments %}
+                                    <li>
+                                        <div class="comment-details">
+                                            <h4 class="comment-author">{{ comment.comment_user | title }}</h4>
+                                            <span>{{ comment.time }}</span>
+                                            <p class="comment-description">
+                                                {{ comment.comment }}
+                                            </p>
+                                            {% if user == blog.user %}
+                                                <a class="text-danger" href={% url 'blog:delete_comment' comment.comment_id %}>Delete</a>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="comment-description">
+                                No comment has been added
+                            </p>
+                        {% endif %}
+
+                    </div>
+                    <div class="form-comments">
+                        <div class="title-box-d">
+                            <h3 class="title-d"> Leave a Reply</h3>
+                        </div>
+                        {% if user.is_authenticated %}
+                            <form class="form-a" method="POST" action={% url 'blog:save_comment' blog.blog_id %}>
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label for="textMessage">Enter Comment</label>
+                                            {{ comment_form.comment }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-a">Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                            <p>
+                                Please login to leave a reply.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Blog Single-->
+
+    </main><!-- End #main -->
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    $('#delete_button').click(function(){
+            if (confirm('Are you sure to delete this blog?')){
+                location.href = "{% url 'blog:delete_blog' blog.blog_id %}"
+            }
+        })
+    </script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnLQoIBHPPU6UbnygTwqFjH4JmgNTMsjI&callback=initMap&v=weekly&channel=2" async>
+    </script>
+    <script>
+        function initMap() {
+            const myLatlng = {lat: {{property.latitude}}, lng: {{property.longitude}}};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: 'hybrid',
+            });
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+            });
+            setTimeout(function () {
+                $(".dismissButton").trigger('click');
+            }, 1000);
+            $('#map').children().eq(1).remove();
+        }
+    </script>
+{% endblock %}
+
+{% include "footer.html" %}

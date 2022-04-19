@@ -1,0 +1,48 @@
+{% load static %}
+{% include "header.html" %}
+
+{% block chat %}
+    <main id="main">
+        <section class="intro-single">
+        {% include 'essential/messages.html' %}
+            <div class="container">
+                <div class="card">
+                    <div class="row g-0" style="background: #6495ed">
+                        <div class="shadow rounded-3 my-5">
+                            <form method="GET" action="">
+                                <div class="px-4 d-md-block">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1">
+                                            {{ search_form }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <ul>
+                                {% for user in users %}
+                                    <div class="form-group col-8 col-lg-6 col-xl-8">
+                                        <a class="list-group-item list-group-item-action border-0 m-25p" href={% url 'chat:chat_window' user %}>
+                                            <!--<div class="badge bg-success float-right">5</div>-->
+                                            <div class="d-flex align-items-start">
+                                                <img src="https://robohash.org/{{ user.username }}.png?set=set1" class="rounded-circle mr-1"
+                                                     alt={{ user.username }} width="60" height="60">
+                                                <div class="flex-grow-1 ml-3 chat-name">
+                                                    {{ user.get_full_name | title }} - {{ user.get_username }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% empty %}
+                                    <a href={% url 'chat:chat_dashboard' %}>
+                                        <h2 class="text-center">No results found!</h2>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                            <hr class="d-block d-lg-none mt-1 mb-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

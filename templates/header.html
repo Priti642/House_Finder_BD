@@ -8,90 +8,101 @@
 {% bootstrap_javascript %}
 
 <head>
-    <title>House Finder BD</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <title>House Finder BD</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <!-- Pepper Js -->
+    <link href="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/svg" href="{% static 'favicon.svg' %}">
-
 </head>
-<body id="particles-js">
-<nav class="navbar navbar sticky-top navbar-expand-lg navbar-dark" id="header-navbar">
-    <a class="navbar-brand" style="padding: 0 50px 0 10px;font-size: 30px; font-weight: 600;" href="{% url 'home' %}">
-        House Finder BD
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    {% if user.is_authenticated %}
+<body>
+{% include "essential/search.html" %}
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a class="navbar-brand text-brand" href={% url 'home' %}>
+            House
+            <span class="color-b">Finder BD</span>
+        </a>
 
-        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 14px;">
+        <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href={% url 'home' %}>
+                        Home <i class="bi bi-house"></i>
+                    </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'chat:chat_users' %}">Chat</a>
+
+                <li class="nav-item">
+                    <a class="nav-link " href={% url 'blog:blog_dashboard' %}>
+                        Blog <i class="bi bi-journal-album"></i>
+                    </a>
                 </li>
-                {% if user.is_superuser %}
+
+                <li class="nav-item">
+                    <a class="nav-link " href={% url 'property:property_dashboard' %}>
+                        Property <i class="bi bi-building"></i>
+                    </a>
+                </li>
+
+                {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'save_blog' %}">Write Blog</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                        <a class="nav-link " href={% url 'chat:chat_dashboard' %}>
+                            Chat <i class="bi bi-chat-left"></i>
+                        </a>
                     </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Logout' %}">
-                        Logout ({{ user.get_short_name }})
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if user.is_authenticated %}
+                            {{ user | title }} <i class="bi bi-person-fill"></i>
+                        {% else %}
+                            User <i class="bi bi-person"></i>
+                        {% endif %}
                     </a>
+                    <div class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                                <a class="dropdown-item" href={% url 'blog:save_blog' %}>Write Blog</a>
+                                <a class="dropdown-item" href={% url 'property:register_property' %}>Register Property</a>
+                                <a class="dropdown-item" href={% url 'admin:index' %}>Admin Panel</a>
+                            {% endif %}
+                            <a class="dropdown-item" href={% url 'post:apply_to_post_property' %}>Property Profile</a>
+                            <a class="dropdown-item" href={% url 'Logout' %}>Logout</a>
+                        {% else %}
+                            <a class="dropdown-item" href={% url 'Login' %}>Login</a>
+                            <a class="dropdown-item" href={% url 'Register' %}>Register</a>
+                        {% endif %}
+                    </div>
                 </li>
             </ul>
         </div>
 
-    {% else %}
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end ">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Login' %}">
-                        <button type="button" class="btn btn-primary">Login</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Register' %}">
-                        <button type="button" class="btn btn-primary">Sign Up</button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
+        <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
 </nav>
-
-<br>
-{% include 'essential/messages.html' %}
-
-<script src={% static 'js/particles.js' %}></script>
-<script src={% static 'js/app.js' %}></script>
-<script>
-    function goToLink(id) {
-        window.location.href = 'blog_view/' + id;
-    }
-</script>
